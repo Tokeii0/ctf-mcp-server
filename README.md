@@ -1,6 +1,8 @@
 # ctf-mcp-server
 
 
+先临时搞几个先
+
 ```json
 {
   "mcpServers": {
