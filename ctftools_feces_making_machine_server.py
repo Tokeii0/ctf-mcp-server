@@ -1,9 +1,11 @@
 from mcp.server.fastmcp import FastMCP
 from typing import Optional
-from tools.qrcode_plugin import encode_qrcode,decode_qrcode
-from tools.encoding import base64_decode, decode_base58, decode_base45
+from tools.qrcode_plugin import encode_qrcode
+from tools.encoding import base64_encode, encode_base58, encode_base45, hex_encode
 from tools.zip_plugin import zip_file
 from tools.xor_plugin import xor_string,xor_file,xor_image
+from tools.pic.acg_pic_plugin import get_acg_image
+from tools.pic.lsb_plugin import lsb_encode
 
 
 # 创建MCP服务器
@@ -22,6 +24,34 @@ def create_qr(text: str, size: Optional[int] = 200, savepath: Optional[str] = ''
     '''
     return encode_qrcode(text, size, savepath, filename)
 
+@mcp.tool()
+def get_acg_image_(save_path: Optional[str] = None, filename: Optional[str] = None):
+    '''
+    获取随机ACG图片
+    :param save_path: 保存路径，默认为当前目录
+    :param filename: 保存的文件名，默认为随机生成
+    :return: 保存结果信息
+    '''
+    return get_acg_image(save_path, filename)
+@mcp.tool()
+def lsb_encode_(image_path: str, text: str, output_path: Optional[str] = None):
+    '''
+    从图片中提取LSB隐写信息
+    :param image_path: 图片路径
+    :param text: 要隐写的信息
+    :param output_path: 输出图片路径，默认为原图片添加.lsb后缀
+    :return: 操作结果信息
+    '''
+    return lsb_encode(image_path, text, output_path)
+
+@mcp.tool()
+def hex_encode_(text: str):
+    '''
+    Hex 编码
+    :param text: 要编码的字符串
+    :return: 编码后的字符串
+    '''
+    return hex_encode(text)
 
 @mcp.tool()
 def b64_encode(text: str):
@@ -63,7 +93,7 @@ def zip_file_(file_path: str, zip_path: str):
     return zip_file(file_path, zip_path)
 
 @mcp.tool()
-def xor_string(text: str, key: str):
+def xor_string_(text: str, key: str):
     '''
     对字符串进行XOR操作
     :param text: 要进行XOR操作的字符串
@@ -73,7 +103,7 @@ def xor_string(text: str, key: str):
     return xor_string(text, key)
 
 @mcp.tool()
-def xor_file(file_path: str, key: str, output_path: Optional[str] = None):
+def xor_file_(file_path: str, key: str, output_path: Optional[str] = None):
     '''
     对文件内容进行XOR操作
     :param file_path: 要进行XOR操作的文件路径
@@ -84,7 +114,7 @@ def xor_file(file_path: str, key: str, output_path: Optional[str] = None):
     return xor_file(file_path, key, output_path)
 
 @mcp.tool()
-def xor_image(image_path: str, key: str, output_path: Optional[str] = None):
+def xor_image_(image_path: str, key: str, output_path: Optional[str] = None):
     '''
     对图片进行XOR操作
     :param image_path: 要进行XOR操作的图片路径
