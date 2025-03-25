@@ -1,25 +1,36 @@
-# ctf-mcp-server
+# CTF-MCP-Server
+
+  尝试用AI进行CTF解题
+
+## 两种服务器
+
+1. **ctftools_Puzzle_server**：主要用于解题
+2. **ctftools_feces_making_machine_server**：主要用于出题
+
+## 使用方法
+
+ 使用Cline 或者二开相关插件，导入mcp配置文件
 
 
-先临时搞几个先
+
+
 
 ```json
 {
   "mcpServers": {
-    "ctftools": {
+    "ctftools_Puzzle_server": {
       "command": "python",
       "args": [
-        "D:\\xxx\\server.py"
+        "D:\\AI\\ctf-mcp-server\\ctftools_Puzzle_server.py"
       ],
-      "alwaysAllow": [
-        "decode_qr",
-        "create_qr",
-        "b64_encode",
-        "b64_decode",
-        "b58_encode",
-        "b58_decode"
+      "timeout": 1800
+    },
+    "ctftools_feces_making_machine_server": {
+      "command": "python",
+      "args": [
+        "D:\\AI\\ctf-mcp-server\\ctftools_feces_making_machine_server.py"
       ],
-      "timeout": 900
+      "timeout": 1800
     }
   }
 }
