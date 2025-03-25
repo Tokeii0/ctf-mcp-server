@@ -1,16 +1,23 @@
 from mcp.server.fastmcp import FastMCP
 from typing import Optional
 from tools.qrcode_plugin import decode_qrcode
-from tools.base64_plugin import base64_decode
-from tools.base58_plugin import decode_base58
-from tools.base45_plugin import decode_base45
+from tools.encoding import base64_decode, decode_base58, decode_base45
 from tools.zip_plugin import extract_zip
 from tools.xor_plugin import xor_string,xor_file,xor_image
+from tools.file_type_judgment_plugin import identify_file_type
 
 
 # 创建MCP服务器
 mcp = FastMCP("ctftools_Puzzle_server")
 
+@mcp.tool()
+def identify_file_type(file_path: str):
+    '''
+    判断文件类型(如果再提供文件的情况下优先使用该工具)
+    :param file_path: 文件路径
+    :return: 文件类型信息
+    '''
+    return identify_file_type(file_path)
 
 @mcp.tool()
 def decode_qr(image_path: str):

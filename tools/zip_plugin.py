@@ -28,8 +28,6 @@ def extract_zip(zip_path, extract_to=None):
     except Exception as e:
         return f"解压过程中出错: {str(e)}"
 
-# 压缩
-@mcp.tool()
 def zip_file(file_path: str, zip_path: str):
     '''
     压缩文件
